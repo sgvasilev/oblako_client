@@ -1,0 +1,38 @@
+.main {
+  display: grid;
+  margin: 0 auto;
+  padding: 0 48px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  @media screen and(max-width: 350px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 0 8px;
+  }
+
+  gap: 12px;
+  justify-content: center;
+
+  &__card {
+    min-height: 50px;
+    border: 1px solid gray;
+    margin-top: 12px;
+    padding: 16px;
+  }
+  &__text {
+    margin: 10px;
+  }
+}
+p {
+  font-weight: 700;
+}
+::ng-deep.mat-checkbox .mat-checkbox-frame {
+  border-color: green;
+}
+.text {
+  &-crossed {
+    font-style: italic;
+    text-decoration: line-through;
+  }
+  &-normal {
+    font-style: normal;
+  }
+}

@@ -1,0 +1,19 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+.header {
+  background-color: rgb(39, 125, 151);
+  height: 70px;
+  &__btn {
+    padding: 0px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    color: #fff;
+  }
+  &__text {
+    margin: 0 auto;
+  }
+}

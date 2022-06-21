@@ -1,0 +1,22 @@
+<div class="main">
+  <div *ngFor="let project of projectsList">
+    <div class="main__card">
+      <p>
+        {{ project.title }}
+      </p>
+      <hr />
+      <div *ngFor="let p of project.todos">
+        <mat-checkbox
+          [(ngModel)]="p.isCompleted"
+          (click)="changeStatus(project, p)"
+        ></mat-checkbox>
+        <span
+          [ngClass]="p.isCompleted ? 'text-crossed' : 'text-normal'"
+          class="main__text"
+        >
+          {{ p.text }}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

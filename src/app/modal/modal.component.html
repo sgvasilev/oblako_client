@@ -1,0 +1,86 @@
+<div class="modal">
+  <h3 mat-dialog-title>Новая задача</h3>
+  <hr />
+  <form [formGroup]="form">
+    <div class="modal_card">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Название задачи...</mat-label>
+        <input matInput type="text" formControlName="newTodo" />
+        <mat-error>Поле не должно быть пустым</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="selected == 'Новый проект'" class="modal_card">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Название нового проекта...</mat-label>
+        <input matInput type="text" formControlName="newProject" />
+        <mat-error>Поле не должно быть пустым</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="modal_card">
+      <mat-form-field appearance="fill">
+        <mat-label>Выбрать задачу</mat-label>
+        <mat-select
+          (value)="(selected)"
+          formControlName="currProject"
+          (selectionChange)="choose($event)"
+        >
+          <mat-option [value]="p" *ngFor="let p of projects">
+            {{ p }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="modal__group">
+      <button
+        class="modal__btn"
+        mat-stroked-button
+        type="button"
+        color="accent"
+        (click)="close()"
+      >
+        Отмена
+      </button>
+      <button
+        (click)="submit()"
+        class="modal__btn"
+        mat-flat-button
+        color="accent"
+        type="submit"
+      >
+        Ок
+      </button>
+    </div>
+  </form>
+  <!-- <mat-form-field class="example-form-field width100" appearance="fill"> -->
+  <!-- <form [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Выбрать задачу</mat-label>
+        <mat-select color="accent" [(value)]="selected" name="projectList">
+          <mat-option
+            color="accent"
+            (click)="choose()"
+            *ngFor="let p of projects"
+            [value]="p"
+          >
+            {{ p }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="modal__group">
+        <button
+          class="modal__btn"
+          mat-stroked-button
+          type="button"
+          color="accent"
+          (click)="close()"
+        >
+          Отмена
+        </button>
+        <button class="modal__btn" mat-flat-button color="accent" type="submit">
+          Ок
+        </button>
+      </div>
+    </form>
+  </mat-form-field> -->
+</div>
