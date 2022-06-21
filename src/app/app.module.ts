@@ -44,7 +44,6 @@ import { ModalComponent } from './modal/modal.component';
     MatDividerModule,
     MatSelectModule,
   ],
-
   providers: [ProjectApiService],
   bootstrap: [AppComponent],
 })

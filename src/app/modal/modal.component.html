@@ -10,7 +10,7 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="selected == 'Новый проект'" class="modal_card">
+    <div *ngIf="selected == 0" class="modal_card">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Название нового проекта...</mat-label>
         <input matInput type="text" formControlName="newProject" />
@@ -25,8 +25,8 @@
           formControlName="currProject"
           (selectionChange)="choose($event)"
         >
-          <mat-option [value]="p" *ngFor="let p of projects">
-            {{ p }}
+          <mat-option [value]="t[1]" *ngFor="let t of titles | async">
+            {{ t[0] }}
           </mat-option>
         </mat-select>
       </mat-form-field>

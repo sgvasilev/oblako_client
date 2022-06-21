@@ -1,23 +1,55 @@
 import { Injectable } from '@angular/core';
+import { plainToInstance } from 'class-transformer';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Project } from './project-api.service';
+import { Todo } from './model/todo.model';
+import { Project, ProjectApiService } from './project-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
-  private _project = new BehaviorSubject<any>([]);
-  private _projects$ = this._project.asObservable();
-  getProjectList(): Observable<Project[]> {
-    console.log(this._projects$);
-    return this._projects$;
+  private projects$ = new BehaviorSubject<Project[]>([]);
+  readonly projects = this.projects$.asObservable();
+
+  private titles$ = new BehaviorSubject<Array<Array<any>>>([]);
+  readonly titles = this.titles$.asObservable();
+
+  private projectArray: any = [];
+
+  constructor(private projectApiService: ProjectApiService) {
+    this.loadProjects();
   }
-  setProjectList(projectList: any): Observable<unknown> {
-    this._project.next(projectList);
-    return this._projects$;
+  loadProjects() {
+    this.projectApiService.getListOfProjects().subscribe((res: Project[]) => {
+      this.projectArray.push(res);
+      this.projects$.next(Object.assign([], this.projectArray)[0]);
+    });
   }
-  addProjectToList(project: any): Observable<any> {
-    this._project.next(this._project.getValue().concat([project]));
-    return this._project;
+  loadTitles() {
+    let tempArr: Array<Array<number | string>> = [['Новый проект', 0]];
+    this.projectArray[0].forEach((el: any) => {
+      const res = [el.title, el.id];
+      tempArr.push(res);
+      this.titles$.next(Object.assign([], tempArr));
+    });
+  }
+  createProject(project: Project, isNew: boolean, currProject: number) {
+    this.projectApiService
+      .createNewProject(project, currProject)
+      .subscribe((response) => {
+        if (isNew) {
+          this.projectArray[0].push(response);
+          this.projects$.next(Object.assign([], this.projectArray[0]));
+          return;
+        } else {
+          let tempArr = this.projectArray[0].find(
+            (el: Project) => el.id === currProject
+          );
+          tempArr.todos.push(plainToInstance(Todo, response[0]));
+          this.projectArray[0][tempArr] = tempArr;
+          this.projects$.next(Object.assign([], this.projectArray[0]));
+          return;
+        }
+      });
   }
 }

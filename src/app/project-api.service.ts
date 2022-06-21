@@ -36,11 +36,17 @@ export class ProjectApiService {
       .get<Project[]>(this.projectUrl)
       .pipe(map((el) => this.reorderTodos(el)));
   }
-  public createNewProject(project: Project): Observable<any> {
-    return this.http.post<Project>(`${this.projectUrl}/0/todos`, project);
+  public createNewProject(
+    project: Project,
+    currProject: number
+  ): Observable<any> {
+    return this.http.post<Project>(
+      `${this.projectUrl}/${currProject}/todos`,
+      project
+    );
   }
-  private reorderTodos(stream: any) {
-    return stream.map((x: any) => {
+  private reorderTodos(stream: Project[]) {
+    return stream.map((x: Project) => {
       const todos = x.todos.sort(this.compareFn);
       const resulted = plainToInstance(ProjectModel, { ...x, todos });
       return resulted;

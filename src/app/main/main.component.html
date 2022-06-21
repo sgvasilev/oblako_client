@@ -1,5 +1,5 @@
 <div class="main">
-  <div *ngFor="let project of projectsList">
+  <div *ngFor="let project of projects | async">
     <div class="main__card">
       <p>
         {{ project.title }}
