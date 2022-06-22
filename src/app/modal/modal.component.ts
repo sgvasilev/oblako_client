@@ -17,7 +17,6 @@ export class ModalComponent implements OnInit {
   selected = 0;
   constructor(
     private projectService: ProjectService,
-    // private dialog: MatDialog,
     private modalRef: MatDialogRef<ModalComponent>
   ) {}
 
@@ -47,7 +46,6 @@ export class ModalComponent implements OnInit {
     const createdProject = new ProjectModel();
     createdProject.Title = newProject;
     createdProject.Todos = newTodo;
-    console.log(currProject, newProject, newTodo, createdProject);
     if (currProject === 0) {
       this.projectService.createProject(createdProject, isNew, currProject);
     } else {

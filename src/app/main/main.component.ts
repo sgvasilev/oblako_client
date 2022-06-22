@@ -25,4 +25,18 @@ export class MainComponent {
         .changeStatus(id, !isCompleted, todoId)
         .subscribe();
   }
+  deleteTodo(todoId: number, projectId: number) {
+    this.projectService.deleteTodo(todoId, projectId);
+  }
+  deleteProject(id: number) {
+    this.projects
+      .subscribe((el: Array<any>) => {
+        let result = el.findIndex((idx: any) => {
+          return idx.id === id;
+        }, id);
+        result++;
+        this.projectService.deleteProject(result, id);
+      })
+      .unsubscribe();
+  }
 }

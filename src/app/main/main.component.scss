@@ -1,3 +1,7 @@
+::ng-deep.mat-checkbox-inner-container {
+  width: 26px !important;
+  height: 26px !important;
+}
 .main {
   display: grid;
   margin: 0 auto;
@@ -6,6 +10,41 @@
   @media screen and(max-width: 350px) {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     padding: 0 8px;
+  }
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  &__container {
+    display: flex;
+    transition: all 0.2s;
+    margin: 1px 0px 0px 0px;
+  }
+  &__container:hover {
+    transition: all 0.2s;
+    background-color: rgb(151, 241, 139);
+    display: flex;
+  }
+  &__container:hover .main__button {
+    transition: opacity 0.1s;
+    opacity: 100;
+    cursor: pointer;
+    position: relative;
+    width: 26px;
+    height: 26px;
+    background: transparent;
+    border: none;
+  }
+  &__button-container:hover .main__button {
+    transition: opacity 0.1s;
+    opacity: 100;
+    cursor: pointer;
+    position: relative;
+    width: 26px;
+    height: 26px;
+    background: transparent;
+    border: none;
   }
 
   gap: 12px;
@@ -18,7 +57,9 @@
     padding: 16px;
   }
   &__text {
-    margin: 10px;
+    margin: 0px 0px 0px 10px;
+    line-height: 2;
+    width: 100%;
   }
 }
 p {
@@ -35,4 +76,37 @@ p {
   &-normal {
     font-style: normal;
   }
+}
+
+.main__button {
+  transition: opacity 0.1s;
+  opacity: 0;
+  cursor: pointer;
+  position: relative;
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: none;
+}
+
+.main__button:after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 3px;
+  background: rgb(39, 125, 151);
+  left: 11px;
+}
+.main__button:before {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 3px;
+  background: rgb(39, 125, 151);
+}
+.main__button:before {
+  transform: rotate(45deg) translate(-11px, 8px);
+}
+.main__button:after {
+  transform: rotate(-45deg) translate(-7px, -10px);
 }

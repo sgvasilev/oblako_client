@@ -45,6 +45,14 @@ export class ProjectApiService {
       project
     );
   }
+  public deleteTodo(projectId: number, todoId: number) {
+    return this.http.delete<any>(
+      `${this.projectUrl}/${projectId}/todos/${todoId}`
+    );
+  }
+  public deleteProject(fakeId: number) {
+    return this.http.delete<any>(`${this.projectUrl}/${fakeId}}`);
+  }
   private reorderTodos(stream: Project[]) {
     return stream.map((x: Project) => {
       const todos = x.todos.sort(this.compareFn);

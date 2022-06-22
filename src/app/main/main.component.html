@@ -1,21 +1,35 @@
 <div class="main">
   <div *ngFor="let project of projects | async">
     <div class="main__card">
-      <p>
-        {{ project.title }}
-      </p>
+      <div class="main__wrapper main__button-container">
+        <p>
+          {{ project.title }}
+        </p>
+        <div>
+          <button
+            (click)="deleteProject(project['id']!)"
+            class="main__button"
+          ></button>
+        </div>
+      </div>
       <hr />
-      <div *ngFor="let p of project.todos">
+      <div *ngFor="let p of project.todos" class="main__container">
         <mat-checkbox
           [(ngModel)]="p.isCompleted"
           (click)="changeStatus(project, p)"
         ></mat-checkbox>
-        <span
+        <div
           [ngClass]="p.isCompleted ? 'text-crossed' : 'text-normal'"
           class="main__text"
         >
-          {{ p.text }}</span
-        >
+          {{ p.text }}
+        </div>
+        <div>
+          <button
+            (click)="deleteTodo(p['id']!, project['id']!)"
+            class="main__button"
+          ></button>
+        </div>
       </div>
     </div>
   </div>
