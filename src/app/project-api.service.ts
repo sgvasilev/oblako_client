@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { plainToInstance } from 'class-transformer';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Project as ProjectModel } from './model/project.model';
 
 export interface Project {
@@ -19,7 +20,7 @@ export interface Todo {
   providedIn: 'root',
 })
 export class ProjectApiService {
-  private projectUrl = 'http://localhost:3000/projects';
+  private projectUrl = environment.URL;
   constructor(private http: HttpClient) {}
   public changeStatus(
     projectId: number,
