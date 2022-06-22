@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  URL: process.env['HOST_NAME'],
+  URL: 'https://salty-meadow-45976.herokuapp.com',
 };
