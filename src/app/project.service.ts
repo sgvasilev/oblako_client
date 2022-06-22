@@ -22,13 +22,20 @@ export class ProjectService {
   }
   loadProjects() {
     this.projectApiService.getListOfProjects().subscribe((res: Project[]) => {
-      this.projectArray.push(res);
-      this.projects$.next(Object.assign([], this.projectArray)[0]);
+      if (res) {
+        this.projectArray.push(res);
+        this.projects$.next(Object.assign([], this.projectArray)[0]);
+      } else {
+        this.projects$.next(Object.assign([], this.projectArray)[0]);
+      }
     });
   }
   loadTitles() {
     let tempArr: Array<Array<number | string>> = [['Новый проект', 0]];
-    if (this.projectArray[0].length === 0) {
+    if (
+      this.projectArray[0]?.length === 0 ||
+      this.projectArray[0]?.length === undefined
+    ) {
       this.titles$.next(Object.assign([], tempArr));
     } else {
       this.projectArray[0].forEach((el: any) => {
