@@ -55,7 +55,7 @@ export class ProjectApiService {
     return this.http.delete<any>(`${this.projectUrl}/${fakeId}}`);
   }
   private reorderTodos(stream: Project[]) {
-    return stream.map((x: Project) => {
+    return stream?.map((x: Project) => {
       const todos = x.todos.sort(this.compareFn);
       const resulted = plainToInstance(ProjectModel, { ...x, todos });
       return resulted;
