@@ -54,12 +54,17 @@ export class ProjectApiService {
   public deleteProject(fakeId: number) {
     return this.http.delete<any>(`${this.projectUrl}/${fakeId}}`);
   }
-  private reorderTodos(stream: Project[]) {
-    return stream?.map((x: Project) => {
-      const todos = x.todos.sort(this.compareFn);
-      const resulted = plainToInstance(ProjectModel, { ...x, todos });
-      return resulted;
-    });
+  private reorderTodos(stream: Project[]): any {
+    if (stream.length > 0) {
+      return stream.map((x: Project) => {
+        const todos = x.todos.sort(this.compareFn);
+        const resulted = plainToInstance(ProjectModel, { ...x, todos });
+        return resulted;
+      });
+    } else {
+      const res: [] = [];
+      return res;
+    }
   }
   private compareFn = (a: any, b: any): any => {
     if (a.id < b.id) return -1;
